@@ -127,7 +127,7 @@ The application will start on port 8080 and serve both the API and frontend file
 - **Health Check:** http://localhost:8080/api/health
 
 **Production Demo:**
-- **Application:** https://work-1-agondegmivxspeyw.prod-runtime.all-hands.dev
+- **Application:** https://work-2-agondegmivxspeyw.prod-runtime.all-hands.dev
 
 ### VS Code Development Setup
 
