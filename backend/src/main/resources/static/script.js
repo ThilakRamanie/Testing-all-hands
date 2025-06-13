@@ -8,17 +8,14 @@ class LoginManager {
     }
 
     getBackendUrl() {
-        // Check if we're running locally or in production
+        // Since frontend and backend are served from the same Java application,
+        // we can use relative URLs or construct the URL based on current location
+        const protocol = window.location.protocol;
         const hostname = window.location.hostname;
+        const port = window.location.port;
         
-        if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.')) {
-            // Local development
-            return 'http://localhost:8080/api';
-        } else {
-            // Production or other environments
-            // You can modify this for your specific deployment
-            return 'http://localhost:8080/api';
-        }
+        // Construct the API base URL using current location
+        return `${protocol}//${hostname}${port ? ':' + port : ''}/api`;
     }
 
     init() {

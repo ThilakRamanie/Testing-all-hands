@@ -29,15 +29,10 @@ Thumbs.db
 backend/backend.log
 frontend/frontend.log
 
-# Python
+# Python (if needed for development tools)
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-.Python
-env/
-venv/
-.venv/
 
 # Node.js (if needed later)
 node_modules/

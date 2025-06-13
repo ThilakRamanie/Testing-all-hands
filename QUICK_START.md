@@ -14,35 +14,28 @@ cd Testing-all-hands
 code .
 ```
 
-## ⚡ Super Quick Start (3 Steps)
+## ⚡ Super Quick Start (2 Steps)
 
 ### Step 1: Install Prerequisites
 - **Java 17+**: https://adoptium.net/temurin/releases/
 - **Maven**: https://maven.apache.org/download.cgi
-- **Python 3**: https://python.org/downloads/
 
-### Step 2: Start Backend
+### Step 2: Start Application
 ```bash
 # Windows
-start-backend.bat
+start-application.bat
 
 # Mac/Linux
-./start-backend.sh
+./start-application.sh
 ```
 
-### Step 3: Start Frontend
-```bash
-# Windows
-start-frontend.bat
-
-# Mac/Linux  
-./start-frontend.sh
-```
+**That's it!** The application serves both frontend and backend from a single Java process.
 
 ## 🌐 Access the Application
 
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8080/api/health
+- **Application**: http://localhost:8080 (serves both frontend and API)
+- **API Endpoints**: http://localhost:8080/api
+- **Health Check**: http://localhost:8080/api/health
 
 ## 🔑 Test Credentials
 

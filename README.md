@@ -1,19 +1,33 @@
 # Testing-all-hands
 A repository to test the all hands ai agent
 
-## Login Page Application
+## 🚀 Login System with JavaScript Frontend and Java Backend
 
-This project contains a complete login system with a JavaScript frontend and Java Spring Boot backend using mock authentication.
+A complete login system featuring a modern JavaScript frontend and a robust Java Spring Boot backend with mock authentication service. The entire application runs as a single Java application serving both the API and static frontend files.
+
+### Features
+
+- **Modern Frontend**: Responsive HTML5/CSS3/JavaScript interface with gradient styling and smooth animations
+- **Java Backend**: Spring Boot REST API with mock authentication service
+- **Single Application**: Frontend and backend served from the same Java application (no separate servers needed)
+- **Mock Authentication**: Predefined test users with role-based access
+- **CORS Support**: Configured for cross-origin requests
+- **Token-based Auth**: JWT-like token simulation for session management
+- **Error Handling**: Comprehensive client and server-side error handling
+- **Development Tools**: VS Code configuration, REST API testing, and startup scripts
+
+### Technology Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Backend**: Java 17, Spring Boot 3.1.0, Maven
+- **Development**: VS Code, REST Client
+- **Authentication**: Mock service with token simulation
+- **Deployment**: Single JAR file with embedded frontend
 
 ### Project Structure
 
 ```
-├── frontend/                 # JavaScript frontend
-│   ├── index.html           # Main login page
-│   ├── styles.css           # CSS styling
-│   ├── script.js            # JavaScript logic
-│   └── server.py            # Simple HTTP server for frontend
-├── backend/                 # Java Spring Boot backend
+├── backend/                 # Java Spring Boot application
 │   ├── src/main/java/       # Java source code
 │   │   └── com/example/login/
 │   │       ├── LoginApplication.java     # Main Spring Boot application
@@ -22,10 +36,14 @@ This project contains a complete login system with a JavaScript frontend and Jav
 │   │       ├── model/                    # Data models
 │   │       └── service/MockAuthService.java    # Mock authentication service
 │   ├── src/main/resources/
+│   │   ├── static/                      # Frontend files (HTML, CSS, JS)
+│   │   │   ├── index.html              # Main login page
+│   │   │   ├── styles.css              # CSS styling
+│   │   │   └── script.js               # JavaScript logic
 │   │   └── application.properties       # Spring Boot configuration
 │   └── pom.xml                         # Maven dependencies
-├── start-backend.sh         # Script to start Java backend
-└── start-frontend.sh        # Script to start frontend server
+├── start-application.sh     # Script to start the complete application
+└── start-application.bat    # Windows script to start the application
 ```
 
 ### Features
@@ -68,7 +86,6 @@ The application comes with the following test users:
 
 - Java 17 or higher
 - Maven 3.6 or higher
-- Python 3.x (for frontend server)
 
 ## 🚀 Quick Start
 
@@ -84,53 +101,45 @@ The application comes with the following test users:
 
 **Windows:**
 ```bash
-start-backend.bat    # Start backend
-start-frontend.bat   # Start frontend (in new terminal)
+start-application.bat
 ```
 
 **Mac/Linux:**
 ```bash
-./start-backend.sh   # Start backend
-./start-frontend.sh  # Start frontend (in new terminal)
+./start-application.sh
 ```
 
 #### Option 2: Manual setup
 
-1. **Backend Setup:**
-   ```bash
-   cd backend
-   mvn clean compile
-   mvn spring-boot:run
-   ```
+```bash
+cd backend
+mvn clean compile
+mvn spring-boot:run
+```
 
-2. **Frontend Setup:**
-   ```bash
-   cd frontend
-   python3 server.py 12000
-   ```
+The application will start on port 8080 and serve both the API and frontend files.
 
 ### Accessing the Application
 
-**For Local Development:**
-- **Frontend:** http://localhost:3000 (or port specified)
-- **Backend API:** http://localhost:8080/api
+**Local Development:**
+- **Application:** http://localhost:8080 (serves both frontend and API)
+- **API Endpoints:** http://localhost:8080/api
 - **Health Check:** http://localhost:8080/api/health
 
 **Production Demo:**
-- **Frontend:** https://work-1-agondegmivxspeyw.prod-runtime.all-hands.dev
+- **Application:** https://work-1-agondegmivxspeyw.prod-runtime.all-hands.dev
 
 ### VS Code Development Setup
 
 **Recommended Extensions:**
 - Extension Pack for Java (Microsoft)
 - Spring Boot Extension Pack (VMware)
-- Live Server (Ritwick Dey)
 - REST Client (Humao)
 
 **Quick Testing:**
 - Open `api-tests.http` in VS Code for API testing
-- Use Live Server extension for frontend development
-- Debug Java backend with F5
+- Debug Java application with F5
+- Frontend is served automatically by Spring Boot
 
 ### Usage
 

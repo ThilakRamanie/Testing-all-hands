@@ -13,17 +13,12 @@ Before you start, make sure you have the following installed on your local machi
    - Download from: https://maven.apache.org/download.cgi
    - Verify installation: `mvn -version`
 
-3. **Python 3.x** (for frontend server)
-   - Download from: https://python.org/downloads/
-   - Verify installation: `python3 --version` or `python --version`
-
-4. **VS Code**
+3. **VS Code**
    - Download from: https://code.visualstudio.com/
 
 ### Recommended VS Code Extensions
 - **Extension Pack for Java** (by Microsoft)
 - **Spring Boot Extension Pack** (by VMware)
-- **Live Server** (by Ritwick Dey) - Alternative for frontend serving
 - **REST Client** (by Humao) - For API testing
 
 ## 🚀 Step-by-Step Setup
@@ -43,7 +38,7 @@ cd Testing-all-hands
 code Testing-all-hands
 ```
 
-### Step 3: Backend Setup
+### Step 3: Application Setup
 
 #### Option A: Using VS Code Terminal
 1. Open VS Code terminal (`Ctrl+` ` or `View > Terminal`)
@@ -65,51 +60,19 @@ code Testing-all-hands
 #### Option C: Using the provided script
 ```bash
 # Make script executable (Linux/Mac)
-chmod +x start-backend.sh
-./start-backend.sh
+chmod +x start-application.sh
+./start-application.sh
 
-# Windows (use Git Bash or WSL)
-bash start-backend.sh
+# Windows
+start-application.bat
 ```
 
-### Step 4: Frontend Setup
-
-#### Option A: Using Python HTTP Server
-1. Open a new terminal in VS Code (`Terminal > New Terminal`)
-2. Navigate to frontend directory:
-   ```bash
-   cd frontend
-   ```
-3. Start the Python server:
-   ```bash
-   python3 server.py 3000
-   # OR on Windows
-   python server.py 3000
-   ```
-
-#### Option B: Using Live Server Extension
-1. Install the "Live Server" extension in VS Code
-2. Right-click on `frontend/index.html`
-3. Select "Open with Live Server"
-4. The page will open automatically in your browser
-
-#### Option C: Using the provided script
-```bash
-# Make script executable (Linux/Mac)
-chmod +x start-frontend.sh
-./start-frontend.sh
-
-# Windows (use Git Bash or WSL)
-bash start-frontend.sh
-```
+**Note:** The application serves both the frontend and backend from a single Java process on port 8080.
 
 ## 🌐 Accessing the Application
 
-### Frontend URLs
-- **Python Server**: http://localhost:3000 (or the port you specified)
-- **Live Server**: Usually http://127.0.0.1:5500/frontend/ (check VS Code status bar)
-
-### Backend URLs
+### Application URLs
+- **Frontend**: http://localhost:8080 (served by Spring Boot)
 - **API Base**: http://localhost:8080/api
 - **Health Check**: http://localhost:8080/api/health
 
