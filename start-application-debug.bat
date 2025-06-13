@@ -20,7 +20,7 @@ if %errorlevel% neq 0 (
 
 REM Check if Maven is installed
 echo Checking Maven installation...
-mvn -version
+mvn -version >nul 2>&1
 if %errorlevel% neq 0 (
     echo ERROR: Maven check failed with error level: %errorlevel%
     pause
