@@ -131,6 +131,8 @@ The application will start on port 8080 and serve both the API and frontend file
 
 ### VS Code Development Setup
 
+📖 **For detailed VS Code setup instructions, see [VSCODE_SETUP.md](VSCODE_SETUP.md)**
+
 **Recommended Extensions:**
 - Extension Pack for Java (Microsoft)
 - Spring Boot Extension Pack (VMware)
