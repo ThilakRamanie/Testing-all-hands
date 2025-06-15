@@ -3,16 +3,28 @@
     
     <!-- Project properties -->
     <property name="src.dir" value="src/main/java"/>
+    <property name="test.src.dir" value="src/test/java"/>
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="test.classes.dir" value="${build.dir}/test-classes"/>
     <property name="lib.dir" value="lib"/>
+    <property name="test.lib.dir" value="lib/test"/>
     <property name="web.dir" value="web"/>
+    <property name="test.reports.dir" value="${build.dir}/test-reports"/>
     <property name="main.class" value="com.example.login.LoginServer"/>
     
     <!-- Classpath -->
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="*.jar" erroronmissingdir="false"/>
         <pathelement location="${classes.dir}"/>
+    </path>
+    
+    <!-- Test Classpath -->
+    <path id="test.classpath">
+        <fileset dir="${lib.dir}" includes="*.jar" erroronmissingdir="false"/>
+        <fileset dir="${test.lib.dir}" includes="*.jar" erroronmissingdir="false"/>
+        <pathelement location="${classes.dir}"/>
+        <pathelement location="${test.classes.dir}"/>
     </path>
     
     <!-- Clean target -->
@@ -25,7 +37,10 @@
     <target name="init" description="Create build directory">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${test.classes.dir}"/>
         <mkdir dir="${lib.dir}"/>
+        <mkdir dir="${test.lib.dir}"/>
+        <mkdir dir="${test.reports.dir}"/>
         <echo message="Build directories created"/>
     </target>
     
@@ -75,12 +90,47 @@
         </java>
     </target>
     
-    <!-- Test target -->
-    <target name="test" depends="compile" description="Test compilation">
-        <echo message="Testing compilation..."/>
-        <echo message="All classes compiled successfully"/>
-        <echo message="Web files are ready"/>
-        <echo message="Ready to run the server"/>
+    <!-- Compile tests target -->
+    <target name="compile-tests" depends="compile" description="Compile test source files">
+        <echo message="Compiling test source files..."/>
+        <javac srcdir="${test.src.dir}" 
+               destdir="${test.classes.dir}" 
+               classpathref="test.classpath"
+               includeantruntime="false"
+               debug="true"
+               deprecation="true">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+        <echo message="Test compilation completed successfully"/>
+    </target>
+    
+    <!-- Run tests target -->
+    <target name="test" depends="compile-tests" description="Run unit tests">
+        <echo message="Running unit tests..."/>
+        <junit printsummary="yes" haltonfailure="no" haltonerror="no" fork="yes">
+            <classpath refid="test.classpath"/>
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+            <batchtest todir="${test.reports.dir}">
+                <fileset dir="${test.src.dir}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <echo message="Unit tests completed"/>
+        <echo message="Test reports available in: ${test.reports.dir}"/>
+    </target>
+    
+    <!-- Run specific test suite -->
+    <target name="test-suite" depends="compile-tests" description="Run all tests as a suite">
+        <echo message="Running test suite..."/>
+        <junit printsummary="yes" haltonfailure="no" haltonerror="no" fork="yes">
+            <classpath refid="test.classpath"/>
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+            <test name="com.example.login.AllTestSuite" todir="${test.reports.dir}"/>
+        </junit>
+        <echo message="Test suite completed"/>
     </target>
     
     <!-- Package target -->
@@ -104,17 +154,19 @@
     <!-- Help target -->
     <target name="help" description="Show available targets">
         <echo message="Available targets:"/>
-        <echo message="  clean    - Clean build directory"/>
-        <echo message="  compile  - Compile Java source files"/>
-        <echo message="  build    - Build the project"/>
-        <echo message="  run      - Run the login server (default)"/>
-        <echo message="  test     - Test compilation"/>
-        <echo message="  package  - Create JAR file"/>
-        <echo message="  install  - Install the application"/>
-        <echo message="  help     - Show this help"/>
+        <echo message="  clean         - Clean build directory"/>
+        <echo message="  compile       - Compile Java source files"/>
+        <echo message="  compile-tests - Compile test source files"/>
+        <echo message="  build         - Build the project"/>
+        <echo message="  run           - Run the login server (default)"/>
+        <echo message="  test          - Run unit tests"/>
+        <echo message="  test-suite    - Run all tests as a suite"/>
+        <echo message="  package       - Create JAR file"/>
+        <echo message="  install       - Install the application"/>
+        <echo message="  help          - Show this help"/>
         <echo message=""/>
         <echo message="Usage: ant [target]"/>
-        <echo message="Example: ant run"/>
+        <echo message="Example: ant test"/>
     </target>
     
     <!-- Default target info -->

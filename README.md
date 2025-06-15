@@ -8,6 +8,7 @@ A complete login system with JavaScript frontend and Java backend using Apache A
 - **Backend**: Java HTTP server with mock authentication service
 - **Build System**: Apache Ant (no Maven or Gradle)
 - **Mock Service**: Pre-configured test users with different roles
+- **Unit Tests**: Comprehensive test suite with 59+ test cases
 - **CORS Support**: Cross-origin requests enabled
 - **Session Management**: Local storage for user sessions
 - **Responsive Design**: Works on desktop and mobile devices
@@ -99,25 +100,40 @@ The system comes with pre-configured test users:
 
 ```
 Testing-all-hands/
-├── src/main/java/com/example/login/
-│   ├── LoginServer.java              # Main server class
-│   ├── controller/
-│   │   ├── LoginController.java      # Login API handler
-│   │   └── StaticFileHandler.java    # Static file server
-│   ├── service/
-│   │   └── MockAuthService.java      # Authentication service
-│   └── model/
-│       ├── User.java                 # User model
-│       ├── LoginRequest.java         # Login request model
-│       └── LoginResponse.java        # Login response model
+├── src/
+│   ├── main/java/com/example/login/
+│   │   ├── LoginServer.java              # Main server class
+│   │   ├── controller/
+│   │   │   ├── LoginController.java      # Login API handler
+│   │   │   └── StaticFileHandler.java    # Static file server
+│   │   ├── service/
+│   │   │   └── MockAuthService.java      # Authentication service
+│   │   └── model/
+│   │       ├── User.java                 # User model
+│   │       ├── LoginRequest.java         # Login request model
+│   │       └── LoginResponse.java        # Login response model
+│   └── test/java/com/example/login/
+│       ├── AllTestSuite.java             # Test suite runner
+│       ├── controller/
+│       │   └── LoginControllerTest.java  # Controller tests
+│       ├── service/
+│       │   └── MockAuthServiceTest.java  # Service tests
+│       └── model/
+│           ├── UserTest.java             # User model tests
+│           ├── LoginRequestTest.java     # Request model tests
+│           └── LoginResponseTest.java    # Response model tests
 ├── web/
-│   ├── index.html                    # Frontend HTML
-│   ├── styles.css                    # CSS styling
-│   └── script.js                     # JavaScript logic
-├── build.xml                         # Ant build configuration
-├── start.bat                         # Windows startup script
-├── start.sh                          # Unix/Linux startup script
-└── README.md                         # This file
+│   ├── index.html                        # Frontend HTML
+│   ├── styles.css                        # CSS styling
+│   └── script.js                         # JavaScript logic
+├── lib/
+│   └── test/                             # Test dependencies (JUnit, Hamcrest)
+├── build.xml                             # Ant build configuration
+├── start.bat                             # Windows startup script
+├── start.sh                              # Unix/Linux startup script
+├── run-tests.bat                         # Windows test runner
+├── run-tests.sh                          # Unix/Linux test runner
+└── README.md                             # This file
 ```
 
 ## 🔧 Ant Build Targets
@@ -126,12 +142,73 @@ Testing-all-hands/
 ant help          # Show all available targets
 ant clean         # Clean build directory
 ant compile       # Compile Java source files
+ant compile-tests # Compile test source files
 ant build         # Build the project
 ant run           # Build and run the server (default)
-ant test          # Test compilation
+ant test          # Run unit tests
+ant test-suite    # Run all tests as a suite
 ant package       # Create JAR file
 ant install       # Install the application
 ```
+
+## 🧪 Testing
+
+### Running Unit Tests
+
+The project includes a comprehensive test suite with 59+ test cases covering all major components.
+
+**Option 1: Using Test Scripts**
+
+Windows:
+```cmd
+run-tests.bat
+```
+
+Linux/Mac:
+```bash
+./run-tests.sh
+```
+
+**Option 2: Using Ant Directly**
+
+```bash
+# Run all tests
+ant test
+
+# Run test suite
+ant test-suite
+
+# Compile tests only
+ant compile-tests
+```
+
+### Test Coverage
+
+The test suite includes:
+
+- **Model Tests** (28 tests):
+  - `UserTest.java` - User model validation
+  - `LoginRequestTest.java` - Login request validation
+  - `LoginResponseTest.java` - Login response validation
+
+- **Service Tests** (21 tests):
+  - `MockAuthServiceTest.java` - Authentication logic testing
+
+- **Controller Tests** (10 tests):
+  - `LoginControllerTest.java` - HTTP request/response handling
+
+### Test Reports
+
+After running tests, detailed reports are available in:
+- `build/test-reports/` - XML and text format reports
+- Console output shows summary of passed/failed tests
+
+### Test Dependencies
+
+- **JUnit 4.13.2** - Testing framework
+- **Hamcrest Core 1.3** - Assertion library
+
+Dependencies are automatically downloaded to `lib/test/` directory.
 
 ## 🖥️ Development
 
@@ -255,6 +332,17 @@ Error Response:
    # Clean and rebuild
    ant clean
    ant compile
+   ```
+
+5. **Test failures**
+   ```bash
+   # Clean and recompile tests
+   ant clean
+   ant compile-tests
+   ant test
+   
+   # Check test reports
+   cat build/test-reports/*.txt
    ```
 
 ### Debug Mode
