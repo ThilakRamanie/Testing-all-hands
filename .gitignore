@@ -1,0 +1,45 @@
+# Build directories
+build/
+target/
+dist/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Java compiled files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Local configuration
+local.properties
+config.local.*
+
+# Node modules (if any)
+node_modules/
+
+# Backup files
+*.bak
+*.backup

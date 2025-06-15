@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Please sign in to your account</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                    <span class="input-icon">👤</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <span class="input-icon">🔒</span>
+                </div>
+                
+                <button type="submit" id="loginBtn" class="login-btn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loader" style="display: none;">⏳</span>
+                </button>
+            </form>
+            
+            <div id="message" class="message"></div>
+            
+            <div class="demo-users">
+                <h3>Demo Users</h3>
+                <div class="user-list">
+                    <div class="user-item" onclick="fillCredentials('admin', 'admin123')">
+                        <strong>admin</strong> / admin123 <span class="role admin">ADMIN</span>
+                    </div>
+                    <div class="user-item" onclick="fillCredentials('user', 'password')">
+                        <strong>user</strong> / password <span class="role user">USER</span>
+                    </div>
+                    <div class="user-item" onclick="fillCredentials('demo', 'demo')">
+                        <strong>demo</strong> / demo <span class="role user">USER</span>
+                    </div>
+                    <div class="user-item" onclick="fillCredentials('test', 'test123')">
+                        <strong>test</strong> / test123 <span class="role user">USER</span>
+                    </div>
+                    <div class="user-item" onclick="fillCredentials('manager', 'manager123')">
+                        <strong>manager</strong> / manager123 <span class="role manager">MANAGER</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="successPanel" class="success-panel" style="display: none;">
+            <div class="success-content">
+                <div class="success-icon">✅</div>
+                <h2>Login Successful!</h2>
+                <div id="userInfo" class="user-info"></div>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Login System Demo - JavaScript Frontend + Java Backend</p>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

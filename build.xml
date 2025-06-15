@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="LoginSystem" default="run" basedir=".">
+    
+    <!-- Project properties -->
+    <property name="src.dir" value="src/main/java"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="web.dir" value="web"/>
+    <property name="main.class" value="com.example.login.LoginServer"/>
+    
+    <!-- Classpath -->
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="*.jar" erroronmissingdir="false"/>
+        <pathelement location="${classes.dir}"/>
+    </path>
+    
+    <!-- Clean target -->
+    <target name="clean" description="Clean build directory">
+        <delete dir="${build.dir}"/>
+        <echo message="Build directory cleaned"/>
+    </target>
+    
+    <!-- Init target -->
+    <target name="init" description="Create build directory">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${lib.dir}"/>
+        <echo message="Build directories created"/>
+    </target>
+    
+    <!-- Compile target -->
+    <target name="compile" depends="init" description="Compile Java source files">
+        <echo message="Compiling Java source files..."/>
+        <javac srcdir="${src.dir}" 
+               destdir="${classes.dir}" 
+               classpathref="classpath"
+               includeantruntime="false"
+               debug="true"
+               deprecation="true">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+        <echo message="Compilation completed successfully"/>
+    </target>
+    
+    <!-- Build target -->
+    <target name="build" depends="compile" description="Build the project">
+        <echo message="Build completed successfully"/>
+        <echo message="Classes compiled to: ${classes.dir}"/>
+        <echo message="Web files location: ${web.dir}"/>
+    </target>
+    
+    <!-- Run target -->
+    <target name="run" depends="build" description="Run the login server">
+        <echo message="Starting Login Server..."/>
+        <echo message="================================"/>
+        <echo message="Frontend: http://localhost:8080"/>
+        <echo message="API: http://localhost:8080/api"/>
+        <echo message="Health Check: http://localhost:8080/api/health"/>
+        <echo message=""/>
+        <echo message="Test Users:"/>
+        <echo message="- admin / admin123 (ADMIN)"/>
+        <echo message="- user / password (USER)"/>
+        <echo message="- demo / demo (USER)"/>
+        <echo message="- test / test123 (USER)"/>
+        <echo message="- manager / manager123 (MANAGER)"/>
+        <echo message=""/>
+        <echo message="Press Ctrl+C to stop the server"/>
+        <echo message="================================"/>
+        
+        <java classname="${main.class}" 
+              classpathref="classpath" 
+              fork="true">
+            <jvmarg value="-Dfile.encoding=UTF-8"/>
+        </java>
+    </target>
+    
+    <!-- Test target -->
+    <target name="test" depends="compile" description="Test compilation">
+        <echo message="Testing compilation..."/>
+        <echo message="All classes compiled successfully"/>
+        <echo message="Web files are ready"/>
+        <echo message="Ready to run the server"/>
+    </target>
+    
+    <!-- Package target -->
+    <target name="package" depends="build" description="Create JAR file">
+        <echo message="Creating JAR file..."/>
+        <jar destfile="${build.dir}/login-system.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+        </jar>
+        <echo message="JAR file created: ${build.dir}/login-system.jar"/>
+    </target>
+    
+    <!-- Install target -->
+    <target name="install" depends="package" description="Install the application">
+        <echo message="Application built and ready to run"/>
+        <echo message="Use 'ant run' to start the server"/>
+    </target>
+    
+    <!-- Help target -->
+    <target name="help" description="Show available targets">
+        <echo message="Available targets:"/>
+        <echo message="  clean    - Clean build directory"/>
+        <echo message="  compile  - Compile Java source files"/>
+        <echo message="  build    - Build the project"/>
+        <echo message="  run      - Run the login server (default)"/>
+        <echo message="  test     - Test compilation"/>
+        <echo message="  package  - Create JAR file"/>
+        <echo message="  install  - Install the application"/>
+        <echo message="  help     - Show this help"/>
+        <echo message=""/>
+        <echo message="Usage: ant [target]"/>
+        <echo message="Example: ant run"/>
+    </target>
+    
+    <!-- Default target info -->
+    <target name="info" description="Show project information">
+        <echo message="Login System Project"/>
+        <echo message="===================="/>
+        <echo message="Source directory: ${src.dir}"/>
+        <echo message="Build directory: ${build.dir}"/>
+        <echo message="Web directory: ${web.dir}"/>
+        <echo message="Main class: ${main.class}"/>
+        <echo message=""/>
+        <echo message="Frontend: JavaScript with modern styling"/>
+        <echo message="Backend: Java with HTTP server"/>
+        <echo message="Build system: Apache Ant"/>
+    </target>
+    
+</project>
