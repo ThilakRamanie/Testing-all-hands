@@ -6,7 +6,7 @@ This document provides detailed information about the comprehensive unit test su
 
 ## Test Statistics
 
-- **Total Test Cases**: 59
+- **Total Test Cases**: 78
 - **Test Classes**: 6
 - **Test Coverage**: All major components
 - **Framework**: JUnit 4.13.2 with Hamcrest assertions
@@ -20,7 +20,7 @@ src/test/java/com/example/login/
 ├── controller/
 │   └── LoginControllerTest.java      # HTTP controller tests (10 tests)
 ├── service/
-│   └── MockAuthServiceTest.java      # Authentication service tests (21 tests)
+│   └── MockAuthServiceTest.java      # Authentication service tests (40 tests)
 └── model/
     ├── UserTest.java                 # User model tests (8 tests)
     ├── LoginRequestTest.java         # Login request tests (9 tests)
@@ -56,22 +56,49 @@ src/test/java/com/example/login/
 - Boolean flag testing
 - Null value scenarios
 
-### 2. Service Tests (21 tests)
+### 2. Service Tests (40 tests)
 
-#### MockAuthServiceTest.java (21 tests)
-- Valid credential authentication
-- Invalid credential handling
-- Token generation and validation
-- User role verification
-- Edge cases (null, empty, whitespace)
-- All predefined users testing:
-  - admin/admin123 (ADMIN)
-  - demo/demo (USER)
-  - user/password (USER)
-  - test/test123 (USER)
-  - manager/manager123 (MANAGER)
-- Case sensitivity testing
-- Token format validation
+#### MockAuthServiceTest.java (40 tests - Refactored and Enhanced)
+**Initialization Tests (3 tests):**
+- User map initialization and validation
+- Role assignment verification
+- Password validation
+
+**Successful Authentication Tests (6 tests):**
+- Valid credential authentication for all user types
+- Admin, Manager, and User role verification
+- Whitespace trimming functionality
+
+**Failed Authentication Tests (7 tests):**
+- Invalid username/password combinations
+- Case sensitivity validation
+- Non-existent user handling
+
+**Input Validation Tests (11 tests):**
+- Null request/username/password handling
+- Empty field validation
+- Whitespace-only input handling
+- Combined null/empty scenarios
+
+**Token Validation Tests (9 tests):**
+- Valid token format verification
+- Invalid prefix/length handling
+- Generated token validation
+- Special character handling
+- Null/empty token validation
+
+**Token Generation Tests (3 tests):**
+- Unique token generation
+- Token format consistency
+- Multiple token validation
+
+**User Management Tests (2 tests):**
+- Defensive copy verification
+- Immutability protection
+
+**Performance & Concurrency Tests (2 tests):**
+- Concurrent authentication handling
+- Performance benchmarking (1000 authentications)
 
 ### 3. Controller Tests (10 tests)
 
@@ -136,7 +163,7 @@ After running tests, reports are generated in:
 
 ### Sample Output
 ```
-Tests run: 59, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 78, Failures: 0, Errors: 0, Skipped: 0
 ✅ All tests passed!
 ```
 
@@ -220,7 +247,7 @@ ant -v test  # Verbose output for debugging
 
 ---
 
-**Test Suite Status**: ✅ All 59 tests passing
+**Test Suite Status**: ✅ All 78 tests passing
 **Last Updated**: 2025-06-13
 **Framework**: JUnit 4.13.2
 **Build Tool**: Apache Ant
