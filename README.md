@@ -210,6 +210,174 @@ After running tests, detailed reports are available in:
 
 Dependencies are automatically downloaded to `lib/test/` directory.
 
+## 🧪 Manual Testing
+
+### Automated Manual Testing Helper
+
+Run the manual testing helper script to quickly test all API endpoints:
+
+```bash
+./manual-test.sh
+```
+
+This script will:
+- Check if the server is running
+- Test all API endpoints automatically
+- Provide browser URLs for manual UI testing
+- Show a checklist of manual tests to perform
+- Display all available test users
+
+### Quick Manual Testing Steps
+
+After starting the server, follow these steps to manually test the login system:
+
+#### 1. **Access the Application**
+- Open browser and navigate to: http://localhost:12000 (or your configured port)
+- In All Hands environment: Use the provided work URLs
+  - Port 12000: https://work-1-agondegmivxspeyw.prod-runtime.all-hands.dev
+  - Port 12001: https://work-2-agondegmivxspeyw.prod-runtime.all-hands.dev
+
+#### 2. **Test Valid Login**
+1. Enter credentials: `admin` / `admin123`
+2. Click "Login" button
+3. **Expected**: Success message with user role displayed
+4. **Expected**: Login form disappears, welcome message appears
+
+#### 3. **Test Invalid Login**
+1. Enter credentials: `invalid` / `wrong`
+2. Click "Login" button
+3. **Expected**: Error message "Invalid username or password"
+4. **Expected**: Form remains visible for retry
+
+#### 4. **Test Empty Fields**
+1. Leave username/password empty
+2. Click "Login" button
+3. **Expected**: Error message about required fields
+4. **Expected**: Form validation prevents submission
+
+#### 5. **Test All Demo Users**
+Click the demo user buttons to auto-fill and test:
+- **Admin User**: `admin` / `admin123` → Should show "ADMIN" role
+- **Demo User**: `demo` / `demo` → Should show "USER" role
+- **Test User**: `test` / `test123` → Should show "USER" role
+- **Manager**: `manager` / `manager123` → Should show "MANAGER" role
+
+#### 6. **Test API Endpoints Directly**
+
+**Health Check:**
+```bash
+curl http://localhost:12000/api/health
+```
+**Expected Response:**
+```json
+{
+  "status": "OK",
+  "message": "Login service is running"
+}
+```
+
+**Login API:**
+```bash
+curl -X POST http://localhost:12000/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"demo","password":"demo"}'
+```
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Login successful",
+  "token": "token_demo_...",
+  "role": "USER"
+}
+```
+
+#### 7. **Test Browser Console**
+1. Open browser developer tools (F12)
+2. Go to Console tab
+3. Test API calls:
+```javascript
+// Test health endpoint
+fetch('/api/health').then(r => r.json()).then(console.log);
+
+// Test valid login
+fetch('/api/login', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({username: 'demo', password: 'demo'})
+}).then(r => r.json()).then(console.log);
+
+// Test invalid login
+fetch('/api/login', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({username: 'invalid', password: 'wrong'})
+}).then(r => r.json()).then(console.log);
+```
+
+#### 8. **Test Keyboard Shortcuts**
+- **Ctrl+L**: Should focus username field
+- **Enter**: Should submit form when fields are filled
+- **Escape**: Should logout (when logged in)
+
+#### 9. **Test Responsive Design**
+1. Resize browser window to mobile size
+2. **Expected**: Layout adapts to smaller screen
+3. **Expected**: All elements remain accessible and functional
+
+#### 10. **Test Session Management**
+1. Login successfully
+2. Refresh the page
+3. **Expected**: Should remain logged in (session persisted)
+4. Click logout or press Escape
+5. **Expected**: Should return to login form
+
+### Manual Testing Checklist
+
+- [ ] Application loads without errors
+- [ ] All demo user buttons work
+- [ ] Valid credentials allow login
+- [ ] Invalid credentials show error
+- [ ] Empty fields show validation error
+- [ ] Success page shows correct user role
+- [ ] Logout functionality works
+- [ ] API endpoints respond correctly
+- [ ] Responsive design works on mobile
+- [ ] Keyboard shortcuts function
+- [ ] Session persistence works
+- [ ] Browser console shows no errors
+
+### Expected Test Results
+
+| Test Case | Input | Expected Result |
+|-----------|-------|----------------|
+| Valid Admin | admin/admin123 | Success, ADMIN role |
+| Valid User | demo/demo | Success, USER role |
+| Valid Manager | manager/manager123 | Success, MANAGER role |
+| Invalid Credentials | invalid/wrong | Error message |
+| Empty Username | ""/password | Validation error |
+| Empty Password | username/"" | Validation error |
+| Health API | GET /api/health | Status: OK |
+| Login API | POST /api/login | JSON response |
+
+### Troubleshooting Manual Tests
+
+**If login doesn't work:**
+1. Check browser console for JavaScript errors
+2. Verify server is running on correct port
+3. Test API endpoints directly with curl
+4. Check network tab in developer tools
+
+**If UI doesn't load:**
+1. Verify web files are in `web/` directory
+2. Check server logs for file serving errors
+3. Ensure port is accessible
+
+**If API calls fail:**
+1. Check CORS headers in network tab
+2. Verify Content-Type is application/json
+3. Check server logs for request processing
+
 ## 🖥️ Development
 
 ### Frontend Development
@@ -354,7 +522,7 @@ ant -v run  # Verbose mode
 
 ### Testing API
 
-Open browser console and run:
+Use the manual testing steps in the **Manual Testing** section above, or test via browser console:
 ```javascript
 // Test health endpoint
 fetch('/api/health').then(r => r.json()).then(console.log);

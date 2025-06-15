@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class LoginServer {
-    private static final int PORT = 12000;
+    private static final int PORT = 12001;
     private static final String WEB_ROOT = "web";
     
     public static void main(String[] args) {
