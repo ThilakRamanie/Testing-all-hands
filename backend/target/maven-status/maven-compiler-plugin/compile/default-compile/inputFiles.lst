@@ -1,0 +1,8 @@
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\LoginApplication.java
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\controller\AuthController.java
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\service\MockAuthService.java
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\controller\WebController.java
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\model\LoginRequest.java
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\model\LoginResponse.java
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\config\CorsConfig.java
+C:\Users\SESA790322\Documents\Code\All hands poc\Testing-all-hands\backend\src\main\java\com\example\login\model\User.java
