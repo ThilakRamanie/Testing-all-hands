@@ -13,6 +13,13 @@ A complete login system with JavaScript frontend and Java backend using Apache A
 - **Session Management**: Local storage for user sessions
 - **Responsive Design**: Works on desktop and mobile devices
 
+## 📚 Documentation
+
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Complete system architecture and design documentation
+- **[TESTING.md](TESTING.md)** - Comprehensive testing documentation and test suite details
+- **[Manual Testing Guide](#-manual-testing)** - Step-by-step manual testing instructions
+- **[API Documentation](#-api-endpoints)** - REST API reference and examples
+
 ## 📋 Prerequisites
 
 ### Required Software
